@@ -19,9 +19,18 @@
 - run "composer require --dev phpunit/phpunit --with-all-dependencies"
 - run "php artisan migrate"
 
-## Postman Docs
+## Postman Collection
 
-To see postman docs, follow this links : https://api.postman.com/collections/9446257-8a6ba482-5bf1-434b-9330-91864f0333cf?access_key=PMAT-01GZJG038741DT4NP06NMDD415
+To see postman Collection example, follow this links : https://api.postman.com/collections/9446257-8a6ba482-5bf1-434b-9330-91864f0333cf?access_key=PMAT-01GZJG038741DT4NP06NMDD415
+
+every API have authorization, don't forget to login.
+
+## How to Use
+
+- Register User
+- Login
+
+After Login , Token auto generated to environment postman (if use postman collection from the link), so user can use API CRUD for Vehicle, Car, Motorcycle after login.
 
 ## Test Case
 

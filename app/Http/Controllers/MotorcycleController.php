@@ -22,18 +22,48 @@ class MotorcycleController extends Controller
 
     public function show($id)
     {
+        $validator = \Validator::make(['id'=>$id], [
+            'id' => 'required|exists:motorcycles,_id',
+        ],[
+            'id.exists' => 'id invalid'
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+
         $motorcycle = $this->motorcycleService->find($id);
         return response()->json($motorcycle);
     }
 
     public function store(Request $request)
     {
+        $validator = \Validator::make($request->all(), [
+            'machine' => 'required',
+            'suspension_type' => 'required',
+            'transmission_type' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+
         $motorcycle = $this->motorcycleService->create($request->all());
         return response()->json($motorcycle, 201);
     }
 
     public function update(Request $request, $id)
     {
+        $validator = \Validator::make(['id'=>$id], [
+            'id' => 'required|exists:motorcycles,_id',
+        ],[
+            'id.exists' => 'id invalid'
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+
         $motorcycle = $this->motorcycleService->update($id, $request->all());
         return response()->json($motorcycle, 200);
     }

@@ -15,7 +15,6 @@ class VehicleRepository
 
     public function all()
     {
-        // dd($this->vehicle);
         return $this->vehicle->all();
     }
 

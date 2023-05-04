@@ -6,9 +6,19 @@ use App\Http\Controllers\MotorcycleController;
 use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Route;
 
-// Route::post('/auth/login', [AuthController::class, 'login']);
+Route::group([
+    // 'middleware' => 'api',
+    'prefix' => 'auth'
+], function ($router) {
+    Route::post('login', [AuthController::class,'login']);
+    Route::post('register', [AuthController::class,'register']);
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
 
-// Route::middleware(['auth.jwt'])->group(function () {
+});
+
+Route::middleware(['auth.api'])->group(function () {
     // Vehicle Routes
     Route::get('/vehicles', [VehicleController::class, 'index']);
     Route::get('/vehicles/{id}', [VehicleController::class, 'show']);
@@ -29,4 +39,4 @@ use Illuminate\Support\Facades\Route;
     Route::post('/cars', [CarController::class, 'store']);
     Route::put('/cars/{id}', [CarController::class, 'update']);
     Route::delete('/cars/{id}', [CarController::class, 'destroy']);
-// });
+});
